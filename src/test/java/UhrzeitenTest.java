@@ -1,11 +1,10 @@
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 public class UhrzeitenTest {
 
@@ -18,23 +17,10 @@ public class UhrzeitenTest {
 		assertThat(times.size(), not(2000));
 	}
 
-	@Test(expected = IndexOutOfBoundsException.class)
+	@Test(expectedExceptions = IndexOutOfBoundsException.class)
 	public void testIndexOutOfBoundsException() {
 		Uhrzeiten uhrzeiten = new Uhrzeiten();
 		List<String> times = uhrzeiten.assembleAllValidTimes();
 		times.get(-1);
-	}
-
-	@Test
-	public void testIndexOutOfBoundsExceptionAnotherTry() {
-		try {
-			Uhrzeiten uhrzeiten = new Uhrzeiten();
-			List<String> times = uhrzeiten.assembleAllValidTimes();
-			times.get(2000);
-			fail("Expected an IndexOutOfBoundsException to be thrown");
-		} catch (IndexOutOfBoundsException anIndexOutOfBoundsException) {
-			assertThat(anIndexOutOfBoundsException.getMessage(), is("Index: 2000, Size: 1440"));
-		}
-
 	}
 }
