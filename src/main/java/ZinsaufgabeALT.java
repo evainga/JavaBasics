@@ -1,3 +1,5 @@
+package main.java;
+
 public class ZinsaufgabeALT {
 	public static void loop(int min, int top) {
 		System.out.print("\"");

@@ -1,4 +1,6 @@
-public final class voidDoubleIntString {
+package main.java;
+
+public final class VoidDoubleIntString {
 	public static void mv() {
 		java.lang.System.out.println("3");
 	}
