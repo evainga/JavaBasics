@@ -1,4 +1,3 @@
-package main.java;
 
 public final class Main {
 	public static void lineseparator() {

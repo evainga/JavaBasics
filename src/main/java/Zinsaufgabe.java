@@ -1,4 +1,3 @@
-package main.java;
 
 public class Zinsaufgabe {
 	public static void loop(int min, int top) {

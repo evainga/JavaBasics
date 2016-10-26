@@ -1,4 +1,3 @@
-package main.java;
 
 public final class VoidDoubleIntString {
 	public static void mv() {
