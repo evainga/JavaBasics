@@ -1,6 +1,6 @@
 package main.java;
 
-public final class IdDoubleIntString {
+public final class VoidDoubleIntString {
 	public static void mv() {
 		java.lang.System.out.println("3");
 	}
