@@ -1,3 +1,4 @@
+package de.javabasics;
 
 public class ZinsaufgabeALT {
 	public static void loop(int min, int top) {

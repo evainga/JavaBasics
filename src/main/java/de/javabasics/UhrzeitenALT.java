@@ -1,3 +1,4 @@
+package de.javabasics;
 
 public final class UhrzeitenALT {
 	public static void main(final java.lang.String[] args) {

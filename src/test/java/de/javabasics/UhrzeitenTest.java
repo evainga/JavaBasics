@@ -1,3 +1,5 @@
+package de.javabasics;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -8,6 +10,8 @@ import static org.hamcrest.Matchers.lessThan;
 import java.util.List;
 
 import org.testng.annotations.Test;
+
+import de.javabasics.Uhrzeiten;
 
 public class UhrzeitenTest {
 

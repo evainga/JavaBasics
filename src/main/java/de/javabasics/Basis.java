@@ -1,3 +1,4 @@
+package de.javabasics;
 
 public class Basis {
 
