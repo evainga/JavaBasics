@@ -9,8 +9,6 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import main.java.Uhrzeiten;
-
 public class UhrzeitenTest {
 
 	@Test
