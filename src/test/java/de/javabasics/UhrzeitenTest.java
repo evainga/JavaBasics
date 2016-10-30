@@ -11,41 +11,65 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.lessThan;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.testng.annotations.Test;
 
 public class UhrzeitenTest {
+	private Uhrzeiten uhrzeiten = new Uhrzeiten();
 
 	@Test
 	public void assembleAllValidTimes() {
-		Uhrzeiten uhrzeiten = new Uhrzeiten();
 		List<String> times = uhrzeiten.assembleAllValidTimes();
 		assertThat(times, hasSize(1440));
-		assertThat(times.get(2), is("0.02"));
+		assertThat(times.get(2), is("0:02"));
 		assertThat(times, not(hasSize(1220)));
 		assertThat(times.size(), both(lessThan(2000)).and(greaterThan(1000)));
 	}
 
 	@Test(expectedExceptions = IndexOutOfBoundsException.class)
 	public void testLowerBounds() {
-		Uhrzeiten uhrzeiten = new Uhrzeiten();
 		List<String> times = uhrzeiten.assembleAllValidTimes();
 		times.get(-1);
 	}
 
 	@Test(expectedExceptions = IndexOutOfBoundsException.class)
 	public void testUpperBounds() {
-		Uhrzeiten uhrzeiten = new Uhrzeiten();
 		List<String> times = uhrzeiten.assembleAllValidTimes();
 		times.get(2000);
 	}
 
 	@Test
 	public void testStrings() {
-		Uhrzeiten uhrzeiten = new Uhrzeiten();
 		List<String> times = uhrzeiten.assembleAllValidTimes();
-		assertThat(times.get(3), containsString("."));
-		assertThat(times.get(3), startsWith("0.0"));
+		assertThat(times.get(3), containsString(":"));
+		assertThat(times.get(3), startsWith("0:0"));
+	}
+	
+	@Test
+	public void precedingZerosWithLambda() {
+		List<String> times = uhrzeiten.assembleAllValidTimes();
+		
+		int minutesWithPrecedingZeros = times.stream()
+			.filter(time -> isPrecedingZeroInMinutePart(time))
+			.collect(Collectors.toList()).size();
+		
+		assertThat(minutesWithPrecedingZeros, is(10 * 24));
 	}
 
+	@Test
+	public void precedingZerosWithForEachLoop() {
+		List<String> times = uhrzeiten.assembleAllValidTimes();
+		
+		int minutesWithPrecedingZeros = 0;
+		for (String time : times)
+			if (isPrecedingZeroInMinutePart(time))
+				minutesWithPrecedingZeros++;
+		
+		assertThat(minutesWithPrecedingZeros, is(10 * 24));
+	}
+	
+	private boolean isPrecedingZeroInMinutePart(String time) {
+		return time.split(":")[1].startsWith("0");
+	}
 }
