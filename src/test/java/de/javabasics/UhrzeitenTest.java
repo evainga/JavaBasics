@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
@@ -71,5 +72,13 @@ public class UhrzeitenTest {
 	
 	private boolean isPrecedingZeroInMinutePart(String time) {
 		return time.split(":")[1].startsWith("0");
+	}
+	
+	@Test
+	public void allTimesHaveUhrSuffix() {
+		List<String> times = uhrzeiten.assembleAllValidTimes();
+		
+		for (String time : times)
+			assertThat(time, endsWith(" Uhr"));
 	}
 }
