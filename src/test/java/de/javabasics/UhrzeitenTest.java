@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import de.javabasics.Uhrzeiten;
-
 public class UhrzeitenTest {
 
 	@Test
@@ -20,7 +18,7 @@ public class UhrzeitenTest {
 		Uhrzeiten uhrzeiten = new Uhrzeiten();
 		List<String> times = uhrzeiten.assembleAllValidTimes();
 		assertThat(times, hasSize(1440));
-		assertThat(times.get(2), is("0.05"));
+		assertThat(times.get(2), is("0.02"));
 		assertThat(times, not(hasSize(1220)));
 		assertThat(times.size(), greaterThan(1000));
 		assertThat(times.size(), lessThan(2000));
