@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 public class Uhrzeiten {
 	private static final String MINUTE_HOUR_SEPARATOR = ":";
+	private static final String UhrString = " Uhr";
 
 	public List<String> assembleAllValidTimes() {
 		List<String> times = new ArrayList<>();
@@ -18,7 +19,7 @@ public class Uhrzeiten {
 				String assembledString = stunden + MINUTE_HOUR_SEPARATOR;
 				if (minuten < 10)
 					assembledString = assembledString + 0;
-				assembledString = assembledString + minuten + " Uhr";
+				assembledString = assembledString + minuten + UhrString;
 				times.add(assembledString);
 			}
 		}
@@ -26,9 +27,7 @@ public class Uhrzeiten {
 	}
 
 	public List<String> assembleAllValidTimesWithStreams() {
-		return IntStream.rangeClosed(0, 23).boxed()
-				.flatMap(hour -> iterateMinutes(hour))
-				.collect(Collectors.toList());
+		return IntStream.rangeClosed(0, 23).boxed().flatMap(hour -> iterateMinutes(hour)).collect(Collectors.toList());
 	}
 
 	private Stream<String> iterateMinutes(int hour) {
