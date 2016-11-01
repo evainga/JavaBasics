@@ -2,6 +2,9 @@ package de.javabasics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Uhrzeiten {
 	private static final String MINUTE_HOUR_SEPARATOR = ":";
@@ -20,5 +23,16 @@ public class Uhrzeiten {
 			}
 		}
 		return times;
+	}
+
+	public List<String> assembleAllValidTimesWithStreams() {
+		return IntStream.rangeClosed(0, 23).boxed()
+				.flatMap(hour -> iterateMinutes(hour))
+				.collect(Collectors.toList());
+	}
+
+	private Stream<String> iterateMinutes(int hour) {
+		return IntStream.rangeClosed(0, 59).boxed()
+				.map(minute -> String.format("%d%s%02d Uhr", hour, MINUTE_HOUR_SEPARATOR, minute));
 	}
 }
