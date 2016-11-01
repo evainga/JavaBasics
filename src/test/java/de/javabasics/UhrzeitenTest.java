@@ -3,6 +3,7 @@ package de.javabasics;
 import static org.hamcrest.CoreMatchers.both;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.endsWith;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.startsWith;
@@ -22,10 +23,19 @@ public class UhrzeitenTest {
 	@Test
 	public void assembleAllValidTimes() {
 		List<String> times = uhrzeiten.assembleAllValidTimes();
+		
 		assertThat(times, hasSize(1440));
 		assertThat(times.get(2), is("0:02 Uhr"));
 		assertThat(times, not(hasSize(1220)));
 		assertThat(times.size(), both(lessThan(2000)).and(greaterThan(1000)));
+	}
+	
+	@Test
+	public void assembleAllValidTimesWithStreams() {
+		List<String> times = uhrzeiten.assembleAllValidTimes();
+		List<String> timesWithStreams = uhrzeiten.assembleAllValidTimesWithStreams();
+		
+		assertThat(times, equalTo(timesWithStreams));
 	}
 
 	@Test(expectedExceptions = IndexOutOfBoundsException.class)
