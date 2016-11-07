@@ -8,9 +8,22 @@ import java.util.stream.Stream;
 
 public class Uhrzeiten {
 	private static final String MINUTE_HOUR_SEPARATOR = ":";
-	private static final String UhrString = " Uhr";
+	private static final String UHR_STRING = " Uhr";
+
+	/*
+	 * public Uhrzeiten() { } > default Constructor (konstruiert das Objekt)
+	 * wird implizit generiert
+	 */
+
+	public boolean isTwentyFourHourSystem;
+
+	public Uhrzeiten(boolean isTwentyFourHourSystem) {
+		// this. zeigt dass es die Objektvariable nimmt und nicht den Parameter
+		this.isTwentyFourHourSystem = isTwentyFourHourSystem;
+	}
 
 	public List<String> assembleAllValidTimes() {
+		System.out.println(isTwentyFourHourSystem);
 		List<String> times = new ArrayList<>();
 		int stunden;
 		int minuten;
@@ -19,7 +32,7 @@ public class Uhrzeiten {
 				String assembledString = stunden + MINUTE_HOUR_SEPARATOR;
 				if (minuten < 10)
 					assembledString = assembledString + 0;
-				assembledString = assembledString + minuten + UhrString;
+				assembledString = assembledString + minuten + UHR_STRING;
 				times.add(assembledString);
 			}
 		}
@@ -32,6 +45,6 @@ public class Uhrzeiten {
 
 	private Stream<String> iterateMinutes(int hour) {
 		return IntStream.rangeClosed(0, 59).boxed()
-				.map(minute -> String.format("%d%s%02d Uhr", hour, MINUTE_HOUR_SEPARATOR, minute));
+				.map(minute -> String.format("%d%s%02d%s", hour, MINUTE_HOUR_SEPARATOR, minute, UHR_STRING));
 	}
 }

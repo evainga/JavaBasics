@@ -18,23 +18,23 @@ import java.util.stream.Collectors;
 import org.testng.annotations.Test;
 
 public class UhrzeitenTest {
-	private Uhrzeiten uhrzeiten = new Uhrzeiten();
+	private Uhrzeiten uhrzeiten = new Uhrzeiten(false);
 
 	@Test
 	public void assembleAllValidTimes() {
 		List<String> times = uhrzeiten.assembleAllValidTimes();
-		
+
 		assertThat(times, hasSize(1440));
 		assertThat(times.get(2), is("0:02 Uhr"));
 		assertThat(times, not(hasSize(1220)));
 		assertThat(times.size(), both(lessThan(2000)).and(greaterThan(1000)));
 	}
-	
+
 	@Test
 	public void assembleAllValidTimesWithStreams() {
 		List<String> times = uhrzeiten.assembleAllValidTimes();
 		List<String> timesWithStreams = uhrzeiten.assembleAllValidTimesWithStreams();
-		
+
 		assertThat(times, equalTo(timesWithStreams));
 	}
 
